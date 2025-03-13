@@ -46,12 +46,24 @@ public class UserRolesController : ControllerBase
         var groups = await graphClient.Users[userObjectId].MemberOf.GetAsync();
         foreach (var group in groups.Value)
         {
-
-            if (((Group)group).DisplayName == "Commercial accounts")
+            try
             {
-                userRoles.MemberOfCommercialAccounts = true;
-                break;
+                if (((Group)group).DisplayName == "Commercial accounts")
+                {
+                    userRoles.MemberOfCommercialAccounts = true;
+                    break;
+                }
             }
+            catch (Exception ex)
+            {
+
+                //if the exception is because casting is because this is a Entra ID internal user
+                if (ex.Message.Contains("Unable to cast object of type 'Microsoft.Graph.Models.DirectoryRole' to type 'Microsoft.Graph.Models.Group"))
+                {
+                    throw new Exception("This is an Entra ID internal user, can't be used to log in");
+                }
+            }
+
         }
 
         var appRoleAssignments = await graphClient.Users[userObjectId].AppRoleAssignments.GetAsync();

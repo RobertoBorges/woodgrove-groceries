@@ -58,6 +58,18 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_289828D1F69E4F2486701201F8489541 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_B873194E1DA4464484335C935E2ABB1D }}
 
+      #replace in al files the text ___your_tenant___ by the secret from github
+      - name: Replace tokens in files
+        uses: platisd/replace-tokens-action@v4
+        with:
+          rootDirectory: ${{ github.workspace }}
+          targetFiles: '**/*.json'
+          tokenPrefix: '___'
+          tokenSuffix: '___'
+          keepToken: false
+          tokens: |
+            "your_tenant": "${{ secrets.your_tenant }}"
+
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3

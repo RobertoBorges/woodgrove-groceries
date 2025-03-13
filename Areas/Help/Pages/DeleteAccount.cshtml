@@ -69,13 +69,13 @@
 
         <!-- HTTP method-->
         <div class="function-http">
-            <code><span class="method">GET</span> https://graph.microsoft.com/v1.0/users?$select=displayName,id&$filter=identities/any(c:c/issuerAssignedId eq '<span class="highlight">{sign-in-name}</span>' and c/issuer eq '<span class="highlight">{your-tenant-name}</span>')</code>
+            <code><span class="method">GET</span> https://graph.microsoft.com/v1.0/users?$select=displayName,id&$filter=identities/any(c:c/issuerAssignedId eq '<span class="highlight">{sign-in-name}</span>' and c/issuer eq '<span class="highlight">{___your_tenant___}</span>')</code>
         </div>
 
         <!-- PowerShell method-->
         <div class="function-powershell">
             <code><span class="method">Connect-MgGraph</span> <span class="param">-Scopes</span> "User.ReadWrite.All"</code><br>
-            <code><span class="method">Get-MgBetaUser</span> <span class="param">-Property </span> "displayName,id" <span class="param">-Filter </span> "identities/any(c:c/issuerAssignedId eq '<span class="highlight">{sign-in-name}</span>' and c/issuer eq '<span class="highlight">{your-tenant-name}</span>')" </code><br>
+            <code><span class="method">Get-MgBetaUser</span> <span class="param">-Property </span> "displayName,id" <span class="param">-Filter </span> "identities/any(c:c/issuerAssignedId eq '<span class="highlight">{sign-in-name}</span>' and c/issuer eq '<span class="highlight">{___your_tenant___}</span>')" </code><br>
         </div>
 
         <!-- Example-->

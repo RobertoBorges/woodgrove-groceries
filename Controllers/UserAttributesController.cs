@@ -52,7 +52,7 @@ public class UserAttributesController : ControllerBase
         {
             User profile = await _graphServiceClient.Me.GetAsync(requestConfiguration =>
                 {
-                    requestConfiguration.QueryParameters.Select = new string[] { "Id", "identities", "displayName", "GivenName", "Surname", "Country", "City", "AccountEnabled", "CreatedDateTime", "lastPasswordChangeDateTime", $"{ExtensionAttributes}_SpecialDiet" };
+                    requestConfiguration.QueryParameters.Select = new string[] { "Id", "identities", "displayName", "GivenName", "Surname", "Country", "City", "AccountEnabled", "CreatedDateTime", "lastPasswordChangeDateTime", $"{ExtensionAttributes}_Specialdiet" };
                     requestConfiguration.QueryParameters.Expand = new string[] { "Extensions" };
                 });
 
@@ -70,7 +70,7 @@ public class UserAttributesController : ControllerBase
 
             // Get the special diet from the extension attributes
             object specialDiet;
-            if (profile.AdditionalData.TryGetValue($"{ExtensionAttributes}_SpecialDiet", out specialDiet))
+            if (profile.AdditionalData.TryGetValue($"{ExtensionAttributes}_Specialdiet", out specialDiet))
             {
                 att.SpecialDiet = specialDiet.ToString();
             }

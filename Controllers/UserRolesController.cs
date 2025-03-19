@@ -48,7 +48,8 @@ public class UserRolesController : ControllerBase
         {
             try
             {
-                if (((Group)group).DisplayName == "Commercial accounts")
+                //if (((Group)group).DisplayName == "Commercial accounts")
+                if (((Group)group).Id == _configuration.GetSection("AppRoles:CommercialAccountsSecurityGroup").Value)
                 {
                     userRoles.MemberOfCommercialAccounts = true;
                     break;
